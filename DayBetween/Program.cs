@@ -11,21 +11,33 @@ namespace DaysBetween
             string firstDateInput = Console.ReadLine();
             
             Console.WriteLine("What is the second date?");
-            string secondDateInput = Console.ReadLine(); 
-            
-            string countdown = DaysBetween(firstDateInput, secondDateInput);
+            string secondDateInput = Console.ReadLine();
+            DateTime firstDate = DateTime.Parse(firstDateInput);
+            DateTime secondDate = DateTime.Parse(secondDateInput);
+
+            int countdown = DaysBetween(firstDate, secondDate);
             Console.WriteLine(countdown);
            
             Console.ReadLine();
         }
-        public static string DaysBetween (string firstDateInput, string secondDateInput)
+        public static int DaysBetween (DateTime firstDate, DateTime secondDate)
         {
-            DateTime firstDate = DateTime.Parse(firstDateInput);
-            DateTime secondDate = DateTime.Parse(secondDateInput);
-            TimeSpan countdown = firstDate.Subtract(secondDate);
-            string daysBetween = countdown.TotalDays.ToString();
 
-            return daysBetween;
+
+            TimeSpan countdown;
+            if(firstDate > secondDate)
+            {
+                countdown = firstDate.Subtract(secondDate);
+            }
+            else
+            {
+                countdown = secondDate.Subtract(firstDate);
+            }
+           
+            string daysBetween = countdown.TotalDays.ToString();
+            int daysBetweenint = Convert.ToInt32(daysBetween);
+
+            return daysBetweenint;
         }
 
         // TODO: Create that has a method that counts the number of days between two different dates.
